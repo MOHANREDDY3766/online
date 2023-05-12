@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head> online test </head>
+<body>
+<!-- Create a HTML form to display the questions -->
+<form method="post" action="quiz.php">
+  <h2>Question 1</h2>
+  <p>What is the capital of France?</p>
+  <input type="radio" name="q1" value="a">a. London<br>
+  <input type="radio" name="q1" value="b">b. Paris<br>
+  <input type="radio" name="q1" value="c">c. Madrid<br>
+  <input type="radio" name="q1" value="d">d. Berlin<br>
+
+  <h2>Question 2</h2>
+  <p>What is the currency of Japan?</p>
+  <input type="radio" name="q2" value="a">a. Yen<br>
+  <input type="radio" name="q2" value="b">b. Euro<br>
+  <input type="radio" name="q2" value="c">c. Dollar<br>
+  <input type="radio" name="q2" value="d">d. Pound<br>
+
+  <input type="submit" value="Submit">
+</form>
+<?php
+  
+Mohan Reddy Aeturi
+2:32 PM (4 minutes ago)
+to me
+
+// Connect to the database
+$conn = mysqli_connect("localhost", "username", "password", "database");
+
+// Check the answers
+$score = 0;
+if (isset($_POST['q1']) && isset($_POST['q2'])) {
+  $q1 = $_POST['q1'];
+  $q2 = $_POST['q2'];
+
+  $result1 = mysqli_query($conn, "SELECT * FROM questions WHERE id=1");
+  $row1 = mysqli_fetch_assoc($result1);
+  if ($q1 == $row1['answer']) {
+    $score++;
+  }
+
+  $result2 = mysqli_query($conn, "SELECT * FROM questions WHERE id=2");
+  $row2 = mysqli_fetch_assoc($result2);
+  if ($q2 == $row2['answer']) {
+    $score++;
+  }
+}
+
+// Display the results
+echo "Your score is: ".$score."/2<br>";
+echo "Question 1: What is the capital of France? Answer: Paris<br>";
+echo "Question 2: What is the currency of Japan? Answer: Yen<br>";
+
+// Store the results
+if (isset($_POST['q1']) && isset($_POST['q2'])) {
+  $q1 = mysqli_real_escape_string($conn, $_POST['q1']);
+  $q2 = mysqli_real_escape_string($conn, $_POST['q2']);
+  mysqli_query($conn, "INSERT INTO results ?>
+</body>
+</html>
